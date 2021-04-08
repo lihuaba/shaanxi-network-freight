@@ -1,8 +1,7 @@
 <?php
 
-namespace ShaanXiNetworkFreight\Exceptions;
+namespace ShaanXiNetworkFreight;
 
-use ShaanXiNetworkFreight\NetworkFreightException;
 use Faker\Generator as Faker;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
