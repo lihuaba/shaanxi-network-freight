@@ -2,7 +2,6 @@
 
 namespace ShaanXiNetworkFreight;
 
-use App\Services\NetworkFreightService;
 use Illuminate\Support\ServiceProvider;
 
 class NetworkFreightServiceProvider extends ServiceProvider
