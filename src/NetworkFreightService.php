@@ -2,10 +2,8 @@
 
 namespace ShaanXiNetworkFreight;
 
-use Faker\Generator as Faker;
+use App\Exceptions\NetworkFreightException;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ConnectException;
-use Illuminate\Support\Facades\Log;
 
 class NetworkFreightService
 {
@@ -71,11 +69,6 @@ class NetworkFreightService
     protected $iv;
 
     /**
-     * @var Faker
-     */
-    protected $faker;
-
-    /**
      * @var bool
      */
     protected $isDebug = false;
@@ -99,19 +92,17 @@ class NetworkFreightService
 
     /**
      * TaxSuiDeService constructor.
-     * @param Faker $generator
+     * @param array $config
      * @throws NetworkFreightException
      */
-    public function __construct(Faker $generator)
+    public function __construct(array $config)
     {
-        $config = config('default.network_freight');
         $this->setEnv($config);
         $this->username = data_get($config, 'username');
         $this->password = data_get($config, 'password');
         $this->signKey = data_get($config, 'signKey');
         $this->signSecret = data_get($config, 'signSecret');
         $this->iv = data_get($config, 'iv');
-        $this->faker = $generator;
         $this->requestData = [];
         $this->requestType = 0;
         $this->responseData = [];
@@ -271,7 +262,7 @@ class NetworkFreightService
      * @return string|mixed
      * @throws \Exception
      */
-    protected function getUserId()
+    protected function getUserId(): string
     {
         return data_get($this->getExtend(), 'userId');
     }
@@ -287,6 +278,7 @@ class NetworkFreightService
 
     /**
      * 获取token
+     * @throws \Exception
      */
     public function getToken()
     {
@@ -353,37 +345,30 @@ class NetworkFreightService
      */
     protected function post(string $url, array $data, $isGetToken=false)
     {
-        try {
+        $response = $this->client()->post(
+            $url,
+            array_filter(['form_params' => $data,] + $this->headers($isGetToken))
+        );
+        $contents = $response->getBody()->getContents();
+        $this->responseData = [
+            'code'      => $response->getStatusCode(),
+            'headers'   => $response->getHeaders(),
+            'body'      => $contents,
+        ];
+        $result = $this->_getResult($contents);
+        if (200 != $response->getStatusCode()) {
 
-            Log::channel('networkFreightRequest')->info($url, $data);
-            $response = $this->client()->post($url, array_filter([
-                    'form_params' => $data,
-                ] + $this->headers($isGetToken)));
-            $contents = $response->getBody()->getContents();
-            $this->responseData = [
-                'code'      => $response->getStatusCode(),
-                'headers'   => $response->getHeaders(),
-                'body'      => $contents,
-            ];
-            Log::channel('networkFreightResponse')->info($url, $this->responseData);
-            $result = $this->_getResult($contents);
-            if (200 != $response->getStatusCode()) {
-
-                $this->_makeApiException('陕西省网络货运服务请求异常', NetworkFreightException::SERVICE_REQUEST);
-            }
-            $this->_isSuccess($result);
-
-            return $result['content'];
-        } catch (ConnectException $exception) {
-
-            $this->_makeApiException('陕西省网络货运服务请求超时', NetworkFreightException::REQUEST_TIME_OUT);
+            $this->_makeApiException('陕西省网络货运服务请求异常', NetworkFreightException::SERVICE_REQUEST);
         }
+        $this->_isSuccess($result);
 
+        return $result['content'];
     }
 
     /**
      * @param $isGetToken
      * @return array|\string[][]
+     * @throws \Exception
      */
     protected function headers($isGetToken): array
     {
@@ -428,8 +413,9 @@ class NetworkFreightService
      * 是否成功
      *
      * @param array $result API访问结果
-     * @throws NetworkFreightException
      * @return void
+     * @throws \Exception
+     * @throws NetworkFreightException
      */
     private function _isSuccess(array $result)
     {

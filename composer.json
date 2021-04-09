@@ -4,9 +4,7 @@
     "keywords": ["陕西网络货运", "网络货运", "陕西网络货运接口对接"],
     "require": {
         "php": ">=7.2",
-        "fzaninotto/faker": "^1.4",
-        "guzzlehttp/guzzle": "^6.2",
-        "monolog/monolog": "^2.0"
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7",

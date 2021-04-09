@@ -1,4 +1,5 @@
 <?php
+
 namespace ShaanXiNetworkFreight;
 
 use Exception;

@@ -1,10 +1,11 @@
 <?php
 
-namespace DingNotice;
+namespace ShaanXiNetworkFreight;
 
+use App\Services\NetworkFreightService;
 use Illuminate\Support\ServiceProvider;
 
-class DingNoticeServiceProvider extends ServiceProvider
+class NetworkFreightServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -14,7 +15,7 @@ class DingNoticeServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/ding.php' => base_path('config/ding.php'),
+            __DIR__ . '/../config/networkFreight.php' => base_path('config/networkFreight.php'),
         ]);
     }
 
@@ -36,8 +37,8 @@ class DingNoticeServiceProvider extends ServiceProvider
      */
     protected function registerLaravelBindings()
     {
-        $this->app->singleton(DingTalk::class, function ($app) {
-            return new DingTalk($app['config']['ding']);
+        $this->app->singleton(NetworkFreightService::class, function ($app) {
+            return new NetworkFreightService($app['config']['networkFreight']);
         });
     }
 
