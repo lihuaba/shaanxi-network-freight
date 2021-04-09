@@ -1,6 +1,6 @@
 <?php
 
-namespace ShaanXiNetworkFreight;
+namespace App\Services;
 
 use App\Exceptions\NetworkFreightException;
 use GuzzleHttp\Client;
