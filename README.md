@@ -7,7 +7,7 @@
 
 
 # 介绍
-shaanxi-network-freight 是陕西省网络货运监管平台的一个SDK，在官方只有JAVA的SDK，而PHP中的加密方式与JAVA不同导致上传不成功，为了解决此问题，自己写了个SDK，如有任何问题请发送邮件至lhnjxdqq@aliyun.com
+shaanxi-network-freight 是陕西省网络货运监管平台的一个SDK，在官方只有JAVA的SDK，而PHP中的加密方式与JAVA不同导致上传不成功，为了解决此问题，自己写了个SDK，如有任何问题请发送邮件至lihuababa@aliyun.com
 
 # 要求
 - php版本:>=7.2
