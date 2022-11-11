@@ -1,10 +1,10 @@
 # 陕西省网络货运省厅接口对接laravel扩展包
 
-[![Latest Stable Version](http://poser.pugx.org/lhnjxdqq/shaanxi-network-freight/v)](https://packagist.org/packages/lhnjxdqq/shaanxi-network-freight) 
-[![Total Downloads](http://poser.pugx.org/lhnjxdqq/shaanxi-network-freight/downloads)](https://packagist.org/packages/lhnjxdqq/shaanxi-network-freight) 
-[![Latest Unstable Version](http://poser.pugx.org/lhnjxdqq/shaanxi-network-freight/v/unstable)](https://packagist.org/packages/lhnjxdqq/shaanxi-network-freight) 
-[![License](http://poser.pugx.org/lhnjxdqq/shaanxi-network-freight/license)](https://packagist.org/packages/lhnjxdqq/shaanxi-network-freight)
-
+[![Latest Stable Version](http://poser.pugx.org/lihuababa/shaanxi-network-freight/v)](https://packagist.org/packages/lihuababa/shaanxi-network-freight) 
+[![Total Downloads](http://poser.pugx.org/lihuababa/shaanxi-network-freight/downloads)](https://packagist.org/packages/lihuababa/shaanxi-network-freight)
+[![Latest Unstable Version](http://poser.pugx.org/lihuababa/shaanxi-network-freight/v/unstable)](https://packagist.org/packages/lihuababa/shaanxi-network-freight)
+[![License](http://poser.pugx.org/lihuababa/shaanxi-network-freight/license)](https://packagist.org/packages/lihuababa/shaanxi-network-freight)
+[![PHP Version Require](http://poser.pugx.org/lihuababa/shaanxi-network-freight/require/php)](https://packagist.org/packages/lihuababa/shaanxi-network-freight)
 
 # 介绍
 shaanxi-network-freight 是陕西省网络货运监管平台的一个SDK，在官方只有JAVA的SDK，而PHP中的加密方式与JAVA不同导致上传不成功，为了解决此问题，自己写了个SDK，如有任何问题请发送邮件至lihuababa@aliyun.com
@@ -17,7 +17,7 @@ shaanxi-network-freight 是陕西省网络货运监管平台的一个SDK，在�
 # 安装
 
 ```php
-composer require lhnjxdqq/shaanxi-network-freight
+composer require lihuababa/shaanxi-network-freight
 ```
 
 # 在非laravel项目中使用
